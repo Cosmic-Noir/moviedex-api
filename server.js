@@ -20,6 +20,9 @@ app.get("/movie", (req, res) => {
     );
   }
   if (req.query.country) {
+    response = response.filter(movie =>
+      movie.country.toLowerCase().includes(req.query.country.toLowerCase())
+    );
   }
   if (req.query.avg_vote) {
   }
