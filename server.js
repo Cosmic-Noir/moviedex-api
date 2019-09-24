@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -12,7 +13,7 @@ app.use(helmet());
 
 // Validate bearerToken
 app.use(function validateToken(req, res, next) {
-  const apiToken = "123adofgij234";
+  const apiToken = process.env.API_TOKEN;
   const authToken = req.get("Authorization");
 
   // Auth format: "Bearer API_KEY"
