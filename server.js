@@ -36,12 +36,12 @@ app.get("/movie", (req, res) => {
       movie.country.toLowerCase().includes(req.query.country.toLowerCase())
     );
   }
-  // Need to turn string into number?
-  //   if (req.query.avg_vote) {
-  //     response = respones.filter(movie =>
-  //       movie.avg_vote.includes(req.query.avg_vote)
-  //     );
-  //   }
+
+  if (req.query.avg_vote) {
+    response = response.filter(
+      movie => Number(movie.avg_vote) >= Number(req.query.avg_vote)
+    );
+  }
 
   res.json(response);
 });
