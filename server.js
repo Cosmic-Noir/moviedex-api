@@ -10,6 +10,18 @@ app.use(morgan("morgan"));
 app.use(cors());
 app.use(helmet());
 
+// Validate bearerToken
+app.use(function validateToken(req, res, next) {
+  const apiToken = "123adofgij234";
+  const authToken = req.get("Authorization");
+
+  // Auth format: "Bearer API_KEY"
+  if (!authToken || authToken.split(" ")[1] !== apiToken) {
+    return res.status(401).json({ error: "Unauthorized request" });
+  }
+  next();
+});
+
 app.get("/movie", (req, res) => {
   let response = DATA;
 
@@ -24,8 +36,12 @@ app.get("/movie", (req, res) => {
       movie.country.toLowerCase().includes(req.query.country.toLowerCase())
     );
   }
-  if (req.query.avg_vote) {
-  }
+  // Need to turn string into number?
+  //   if (req.query.avg_vote) {
+  //     response = respones.filter(movie =>
+  //       movie.avg_vote.includes(req.query.avg_vote)
+  //     );
+  //   }
 
   res.json(response);
 });
