@@ -10,8 +10,8 @@ const app = express();
 const morganSetting = process.env.NODE_ENV === "production" ? "tiny" : "common";
 
 app.use(morgan(morganSetting));
-app.use(cors());
 app.use(helmet());
+app.use(cors());
 
 app.use((error, req, res, next) => {
   let response;
@@ -62,5 +62,5 @@ app.get("/movie", (req, res) => {
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log("Server started on PORT 8000");
+  console.log(`Server listening at http://localhost:${PORT}`);
 });
