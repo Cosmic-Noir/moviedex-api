@@ -61,6 +61,6 @@ app.get("/movie", (req, res) => {
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(8000, () => {
+app.listen(PORT, () => {
   console.log("Server started on PORT 8000");
 });
