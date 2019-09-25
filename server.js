@@ -7,7 +7,9 @@ const DATA = require("./movieData.json");
 
 const app = express();
 
-app.use(morgan("morgan"));
+const morganSetting = process.env.NODE_ENV === "production" ? "tiny" : "common";
+
+app.use(morgan(morganSetting));
 app.use(cors());
 app.use(helmet());
 
@@ -46,6 +48,8 @@ app.get("/movie", (req, res) => {
 
   res.json(response);
 });
+
+const PORT = process.env.PORT || 8000;
 
 app.listen(8000, () => {
   console.log("Server started on PORT 8000");
